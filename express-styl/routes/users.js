@@ -6,7 +6,7 @@ const knex = require('knex')(knexConfig.development)
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  knex('user')
+  knex('dusers')
   .select({
     id: 'id',
     name: 'name',
@@ -23,22 +23,24 @@ router.get('/', function(req, res, next) {
 
 router.post("/", (req, res) => {
   const name = req.body.name ? req.body.name : '';
-const email = req.body.email ? req.body.email : '';
+  const email = req.body.email ? req.body.email : '';
+  const password = req.body.password ? req.body.password : '';
+
 
 if (!name) {
     return res.status(400).json({success: false, message: 'Name is required'});
 }
 
-knex('user')
-    .insert({name, email})
+knex('dusers')
+    .insert({name, email, password})
     .then((id) => {
     //get user by id
-    knex('user')
+    knex('dusers')
         .select({
         id: 'id',
         name: 'name'
     })
-      .where({id})
+      .where({id: id[0]})
       .then((user1) => {
       return res.status(200).json(user1[0]);
     })
