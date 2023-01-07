@@ -4,6 +4,9 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+// const knexConfig = require('./db/knexfile');
+// //initialize knex
+// const knex = require('knex')(knexConfig[process.env.NODE_ENV])
 
 var app = express();
 
