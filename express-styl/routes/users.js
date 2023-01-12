@@ -52,4 +52,3 @@ knex('dusers')
 })
 
 module.exports = router;
-
