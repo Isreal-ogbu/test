@@ -23,8 +23,8 @@ router.get('/', function(req, res, next) {
 
 router.post("/", (req, res) => {
 const name = req.body.name ? req.body.name : '';
-const email = req.body.email ? req.body.email : '';
-const password = req.body.password ? req.body.password : '';
+      email = req.body.email ? req.body.email : '';
+      password = req.body.password ? req.body.password : '';
 
 
 if (!name) {
