@@ -4,7 +4,7 @@ module.exports = {
       connection: {
           host: '127.0.0.1',
           user: 'root',
-          password: '@Blessing22#',
+          password: '',
           database: 'democlient'
       },
       migrations: {
