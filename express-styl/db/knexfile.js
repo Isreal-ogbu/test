@@ -4,11 +4,12 @@ module.exports = {
       connection: {
           host: '127.0.0.1',
           user: 'root',
-          password: '',
+          password: '@Blessing22#',
           database: 'democlient'
       },
       migrations: {
-          tableName: 'user' 
+          tableName: 'knex_migration' 
       },
   }
+
 };
