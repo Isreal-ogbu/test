@@ -1,11 +1,17 @@
 var express = require('express');
 var router = express.Router();
+
 const knexConfig = require('../db/knexfile');
-//initialize knex
 const knex = require('knex')(knexConfig.development)
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+
+router.route('/')
+
+.all((req, res, next) => {
+  next()
+})
+.get((req, res) => {
   knex('dusers')
   .select({
     id: 'id',
@@ -19,9 +25,9 @@ router.get('/', function(req, res, next) {
     console.error(err);
     return res.json({success: false, message: 'An error occurred, please try again later.'});
   })
-});
+})
 
-router.post("/", (req, res) => {
+.post((req, res) => {
 const name = req.body.name ? req.body.name : '';
       email = req.body.email ? req.body.email : '';
       password = req.body.password ? req.body.password : '';
@@ -51,4 +57,31 @@ knex('dusers')
 });
 })
 
+router.route('/:id')
+
+.all((req,res, next) => {
+  next()
+})
+
+.get((req,res) => {
+  knex('dusers')
+  .select ({
+    id: "id",
+    name: "name"
+  })
+  .where({id : req.params.id})
+  .then((user)=> {
+    return res.json(user)
+  })
+})
+.put((req, res)=> {
+  knex('dusers')
+  .update({
+    name : req.body.name
+  })
+  .where({id : req.params.id})
+  .then(()=> {
+    res.send("changed")
+  })
+})
 module.exports = router;
