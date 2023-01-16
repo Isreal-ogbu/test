@@ -1,8 +1,8 @@
-let config = rewuire("../db/knexfile")
+let config = require("../db/knexfile")
 let knex = require('knex')(config.development)
 
 
-let users = () => {
+module.exports = users = {
     getUsers : () => {
         knex('dusers')
     .select({
@@ -16,13 +16,13 @@ let users = () => {
     .catch((err) => {
       console.error(err);
       return res.json({success: false, message: 'An error occurred, please try again later.'});
-    });
-    };
+    })
+    },
 
     postUsers: () => {
         const name = req.body.name ? req.body.name : '';
-      email = req.body.email ? req.body.email : '';
-      password = req.body.password ? req.body.password : '';
+                email = req.body.email ? req.body.email : '';
+                password = req.body.password ? req.body.password : '';
 
 
 if (!name) {
@@ -47,8 +47,5 @@ knex('dusers')
     console.error(err);
     return res.status(400).json({success: false, message: 'An error occurred, please try again later.'});
 });
-};
-
 }
-
-module.exports = users
+};
